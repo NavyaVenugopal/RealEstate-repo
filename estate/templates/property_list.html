@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block main_block %}
+<div class="container-fluid mt-4 d-flex justify-content-center" data-aos="fade-right" data-aos-duration="2000">
+    <div class="col-md-8">
+        {% if messages %}
+            {% for m in messages %}
+                <div 
+                    class="alert alert-dismissible fade show 
+                        {% if m.tags == 'error' %} alert-danger 
+                        {% elif m.tags == 'success' %} alert-success 
+                        {% elif m.tags == 'warning' %} alert-warning 
+                        {% elif m.tags == 'info' %} alert-info 
+                        {% endif %}" 
+                    role="alert">
+                    <strong>{{ m }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+<div class="container-fluid">
+    <h2 class="text-center mt-4 mb-3" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-weight:600">
+        PROPERTIES COMPLETE DETAILS
+    </h2>
+
+    <form class="row g-3 justify-content-center" action="">
+        <div class="col-md-5">
+            <select class="form-select" name="category" onchange="this.form.submit()">
+                <option value="all" {% if selected_category == 'all' %} selected {% endif %}>All</option>
+                {% for cat in categories %}
+                    <option value="{{ cat }}" {% if selected_category == cat %} selected {% endif %}>{{ cat }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-5">
+            <input type="text" name="search-text" class="form-control" placeholder="Search here">
+        </div>
+        <div class="col-md-auto">
+            <button class="btn btn-dark" type="submit">Search</button>
+        </div>
+    </form>
+
+    <div class="table-responsive mt-5 rounded">
+        <table class="table table-borderedtext-center align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>PROPERTY</th>
+                    <th>PROPERTY NAME</th>
+                    <th>PROPERTY TYPE</th>
+                    <th>PROPERTY STATUS</th>
+                    <th>LOCATION</th>
+                    <th>ADDRESS</th>
+                    <th>PRICE</th>
+                    <th>AREA</th>
+                    <th>NUMBER OF ROOMS</th>
+                    <th>FURNISHED STATUS</th>
+                    <th>VIEW</th>
+                    <th>UPDATE</th>
+                    <th>DELETE</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in data %}
+                <tr>
+                    <td>
+                        {% if i.property_image %}
+                            <img src="{{ i.property_image.url }}" alt="Property Image" class="img-fluid" style="max-width: 200px;">
+                        {% endif %}
+                    </td>
+                    <td>{{ i.property_name }}</td>
+                    <td>{{ i.property_type }}</td>
+                    <td>{{ i.property_status }}</td>
+                    <td>{{ i.location }}</td>
+                    <td>{{ i.address }}</td>
+                    <td>{{ i.price }}</td>
+                    <td>{{ i.area }}</td>
+                    <td>{{ i.no_of_rooms }}</td>
+                    <td>{{ i.furnished_status }}</td>
+                    <td>
+                        <a class="btn btn-outline-dark" href="{% url 'detailestate' i.id %}">Details</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-dark" href="{% url 'updateestate' i.id %}">Update</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-danger" href="{% url 'deleteestate' i.id %}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    AOS.init();
+</script>
+{% endblock %}

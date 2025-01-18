@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block main_block %}
+<div class="container" style="min-height: 100vh; overflow-y: auto; position: relative; padding-bottom: 60px;">
+    <h2 class="text-center mt-4 font-weight-bold" 
+        style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-weight:600">
+        PROPERTY EXPANDED OVERVIEW
+    </h2>
+    <div class="table-responsive mt-5 bg-primary rounded" data-aos="fade-right" data-aos-duration="1800">
+        <div class="row">
+            <!-- Image Column -->
+            <div class="col-md-5 text-center mb-2" data-aos="flip-right" data-aos-duration="3000">
+                {% if data.property_image %}
+                <img src="{{ data.property_image.url }}" alt="Property Image" class="img-fluid rounded">
+                {% endif %}
+            </div>
+            <!-- Details Column -->
+            <div class="col-md-7">
+                <!-- Title -->
+                <h3 class="font-weight-bold" 
+                    style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 60px">
+                    {{ data.property_name }} {{ data.property_type }}
+                </h3>
+                <!-- Details -->
+                <table>
+                    <tbody>
+                        <tr>
+                            <td class="font-weight-bold">Type</td>
+                            <td style="padding-left: 50px;">{{ data.property_type }}</td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">Status</td>
+                            <td style="padding-left: 50px;">{{ data.property_status }}</td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">Location</td>
+                            <td style="padding-left: 50px;">{{ data.location }}</td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">Address</td>
+                            <td style="padding-left: 50px;">{{ data.address }}</td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">Price</td>
+                            <td style="padding-left: 50px;">$ {{ data.price }}</td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">Area</td>
+                            <td style="padding-left: 50px;">{{ data.area }} sq ft</td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">Rooms</td>
+                            <td style="padding-left: 50px;">{{ data.no_of_rooms }}</td>
+                        </tr>
+                        <tr>
+                            <td class="font-weight-bold">Furnished</td>
+                            <td style="padding-left: 50px;">{{ data.furnished_status }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Go Back Button -->
+    <div class="text-center mt-4 mb-4">
+        <a href="{% url 'listrealestate' %}" class="btn btn-primary go-back-btn" 
+           data-aos="zoom-in-up" data-aos-duration="1800">
+            Go Back
+        </a>
+    </div>
+</div>
+
+<script>
+    AOS.init();
+</script>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        margin-top: 10px;
+        padding: 20px;
+    }
+
+    .table td {
+        border: none; 
+        padding: 8px;
+        padding-left: 15px;
+        text-align: left; 
+        vertical-align: middle; 
+        color: #ffffff;
+    }
+
+    .table-responsive {
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow-x: auto; /* Allow horizontal scrolling for wide tables */
+    }
+    
+    .row {
+        display: flex;
+        align-items: center;
+        justify-content: center; 
+        color: #fff;
+        flex-wrap: wrap; /* Ensure items wrap properly on smaller screens */
+    }
+
+    .go-back-btn {
+        transition: background-color 0.3s, transform 0.3s;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .go-back-btn:hover {
+        background-color: #255b94;
+        transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+        h2 {
+            font-size: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+        }
+
+        .table-responsive {
+            margin-bottom: 20px; /* Ensure spacing for button visibility */
+        }
+    }
+
+    @media (max-width: 576px) {
+        table {
+            font-size: 0.9rem;
+        }
+
+        .go-back-btn {
+            font-size: 0.875rem;
+        }
+    }
+</style>
+{% endblock %}

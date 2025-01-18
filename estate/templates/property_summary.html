@@ -1,0 +1,92 @@
+{%extends "base.html"%}
+{%load static%}
+{%block main_block%}
+
+<div class="container mt-5">
+   <div class="row">
+    <div class="col-12 col-md-3"></div>
+    <div class="col-12 col-md-6">
+      <h2 class="text-center" style="letter-spacing:5px;font-size:25px;font-weight:600;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
+        Hey! {{request.user}}...
+      </h2>
+      <h2 class="text-center" style="letter-spacing:5px;font-size:25px;font-weight:600;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
+        Here's your task summary
+      </h2>
+    </div>
+    <div class="col-12 col-md-3 d-flex justify-content-center align-items-center">
+      <a href="{%url 'listrealestate'%}" class="btn btn-primary go-back-btn mt-2" data-aos="fade-left" data-aos-duration="1800" style="width:150px">
+        Go Back
+      </a>
+    </div>
+   </div>
+   
+   <div class="row mt-3">
+      <div class="col-12 col-md-3"></div>
+      <div class="col-12 col-md-6 bg-light rounded mt-3" style="box-shadow:5px 5px 10px rgb(40, 50, 84)">
+        <h5 class="text-center mt-3" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; letter-spacing:2px">
+          <strong>TOTAL REGISTERATIONS</strong>
+        </h5>
+        <h4 class="text-center mt-3"><strong>{{total_registration}}</strong></h4>
+      </div>
+      <div class="col-12 col-md-3"></div>
+    </div>
+
+    <div class="row mt-5">
+      <div class="col-12 col-md-6" data-aos="zoom-in" data-aos-duration="1900">
+        <div class="card border border-1 border-dark" style="width: 70%; box-shadow:5px 5px 10px rgb(40, 50, 84);margin-left:100px">
+          <img src="{%static 'images/property card.jpg'%}" class="card-img-top border border-bt-light" alt="...">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item text-center text-light fw-bold bg-primary">PROPERTY TYPE SUMMARY</li>
+            {%for summary in property_type_summary%}
+            <li class="list-group-item text-light fw-bold bg-primary">
+              <span style="margin-right: 10px;">{{summary.property_type}}</span>
+              <span style="margin-right: 30px;"></span>
+              <span>{{summary.total}}</span>
+            </li>
+            {%endfor%}
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6" data-aos="zoom-out" data-aos-duration="1900">
+        <div class="card border border-1 border-dark" style="width: 70%; box-shadow:5px 5px 10px rgb(40, 50, 84);margin-left:30px">
+          <img src="{%static 'images/prop_status.webp'%}" class="card-img-top border border-bt-light" alt="...">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item text-center text-light fw-bold bg-primary">PROPERTY STATUS SUMMARY</li>
+            {%for summary in property_status_summary%}
+            <li class="list-group-item text-light fw-bold bg-primary">
+              <span style="margin-right: 10px;">{{summary.property_type}}</span>
+              <span style="margin-right: 30px;"></span>
+              <span style="margin-right: 30px;">{{summary.property_status}}</span>
+              <span>{{summary.total}}</span>
+            </li>
+            {%endfor%}
+          </ul>
+        </div>
+      </div>
+    </div>
+</div>
+
+<style>
+  .go-back-btn {
+    transition: background-color 0.3s, transform 0.3s;
+  }
+
+  .go-back-btn:hover {
+    background-color: #255b94;
+    transform: scale(1.05);
+  }
+
+  /* Custom media query for smaller screens */
+  @media (max-width: 767px) {
+    .card {
+      margin-top: 20px;
+    }
+  }
+</style>
+
+<script>
+  AOS.init();
+</script>
+
+{%endblock%}

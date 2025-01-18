@@ -1,0 +1,10 @@
+body {
+    background-image: url("{% static 'images/main.png' %}");
+    background-size: cover;
+    background-position: center 20%;
+    background-repeat: no-repeat;
+    background-color: rgba(255, 255, 255, 0.63);
+    background-blend-mode: overlay;
+}
+
+

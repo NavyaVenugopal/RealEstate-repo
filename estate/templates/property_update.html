@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block main_block %}
+<div class="container" style="max-height: 100vh; overflow-y:visible;">
+    <div class="row" style="margin-top: 30px;">
+        <!-- Left Section-->
+        <div class="col-md-5 col-12 mb-4" style=" top: 30px;" data-aos="zoom-in" data-aos-animation="2000">
+                <img class="rounded" src="{%static 'images/undraw_voice_interface_re_206s.svg'%}" alt="" style="width: 430px;margin-top:300px;">
+        </div>
+        <!-- Form Section-->
+        <div class="col-md-6 col-12 rounded border bg-light mt-1" style="box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.481); padding: 20px;">
+            <h2 style="text-align: center; margin-top:20px; margin-bottom:10px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size:32px; font-weight:600;">
+               PROPERTY UPDATE FORM
+            </h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <!-- Make only the table scrollable -->
+                <div class="responsive" style="max-height: 460px; overflow-y: auto;">
+                    {{ form }}
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-dark mt-4 mb-4">UPDATE DETAILS</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    AOS.init();
+</script>
+{% endblock %}

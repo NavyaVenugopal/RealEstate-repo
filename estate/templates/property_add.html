@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block main_block %}
+<div class="container" style="max-height: 100vh; overflow-y:visible;">
+    <div class="row" style="margin-top: 30px;">
+        <!-- Left Section-->
+        <div class="col-md-5 col-12 mb-4" style=" top: 30px;">
+            <div>
+                {% if messages %}
+                    {% for m in messages %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>{{ m }}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <h5 style="color:rgb(99, 98, 98); font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; margin-top:100px;">
+                Start your journey by registering your property and unlocking endless opportunities!
+            </h5>
+            <img src="{% static 'images/realestate.png' %}" alt="" class="img-fluid mt-3">
+        </div>
+        <!-- Form Section-->
+        <div class="col-md-6 col-12 rounded border bg-light mt-1" style="box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.481); padding: 20px;">
+            <h2 style="text-align: center; margin-top:20px; margin-bottom:10px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size:32px; font-weight:600;">
+                REGISTER PROPERTY
+            </h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <!-- Make only the table scrollable -->
+                <div class="responsive" style="max-height: 460px; overflow-y: auto;">
+                    {{ form }}
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-dark mt-4 mb-4">SUBMIT DETAILS</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    AOS.init();
+</script>
+{% endblock %}
